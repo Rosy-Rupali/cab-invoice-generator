@@ -2,10 +2,12 @@
  * Purpose : It is cab service program where person books the ride and pays
  * bills at the end of the month.
  * @author Rosy Rupali
- * @Since 1-07-2021
+ * @Since 01-07-2021
  * @Version 1.0 
  ***************************************************************************/
 package service;
+
+import model.Ride;
 
 public class InvoiceService {
 
@@ -14,7 +16,7 @@ public class InvoiceService {
 	private static final double MINIMUM_FARE = 5.0;
 
 	/**
-	 * This method is to calculate the fare of ride with the given time and distance 
+	 * UC1-This method is to calculate the fare of ride with the given time and distance 
 	 * @param distance :first argument of the method
 	 * @param time : second argument of the method
 	 * @return : total fare of cab
@@ -26,5 +28,18 @@ public class InvoiceService {
 		}
 		return totalFare;
 
+	}
+	
+	/**
+	 * UC2-This method calculate total fare of all rides
+	 * @param rides : first argument of the method takes multiple rides in an array form
+	 * @return calculate total fare
+	 */
+	public double calculateFare(Ride[] rides) {
+		double totalFare = 0;
+		for( Ride ride : rides) {
+			totalFare += this.calculateFare(ride.distance, ride.time);
+		}
+		return totalFare;
 	}
 }
