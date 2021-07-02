@@ -10,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import model.Ride;
 import service.InvoiceService;
 
 public class InvoiceServiceTest {
@@ -19,6 +20,7 @@ public class InvoiceServiceTest {
 	public void setup() {
 		invoiceService = new InvoiceService();
 	}
+
 	/**
 	 * method to return fare, distance and time given
 	 */
@@ -41,4 +43,13 @@ public class InvoiceServiceTest {
 		Assert.assertEquals(5.0, fare, 0.0);
 	}
 
+	/**
+	 * method to return minimum fare, less distance and time is given
+	 */
+	@Test
+	public void givenMultipleRides_ShouldReturnTotalFare() {
+		Ride[] rides = { new Ride(2.0, 5), new Ride(0.5, 5), new Ride(0.1, 1), };
+		double totalFare = invoiceService.calculateFare(rides);
+		Assert.assertEquals(40, totalFare, 0.0);
+	}
 }
